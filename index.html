@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animal Movement – Vocabulary Lesson</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sky: #4FC3F7;
+  --sky-dark: #0288D1;
+  --leaf: #66BB6A;
+  --leaf-dark: #388E3C;
+  --sun: #FFD54F;
+  --sun-dark: #F9A825;
+  --earth: #A1887F;
+  --earth-dark: #6D4C41;
+  --ocean: #26C6DA;
+  --ocean-dark: #00838F;
+  --berry: #AB47BC;
+  --berry-dark: #6A1B9A;
+  --coral: #FF7043;
+  --coral-dark: #BF360C;
+  --mint: #26A69A;
+  --bg: #F0F9FF;
+  --card: #ffffff;
+  --text: #2d3748;
+  --muted: #718096;
+  --radius: 20px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.10);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.14);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+.site-header {
+  background: linear-gradient(135deg, #1a237e 0%, #283593 40%, #1565C0 100%);
+  color: white;
+  text-align: center;
+  padding: 36px 20px 28px;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.site-header h1 {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  letter-spacing: 1px;
+  position: relative;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+.site-header p {
+  font-size: 1rem;
+  opacity: 0.85;
+  margin-top: 6px;
+  position: relative;
+}
+.paw-icons { font-size: 2rem; margin-bottom: 8px; }
+
+/* ===== NAV ===== */
+.nav-bar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+  background: white;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-btn {
+  background: var(--bg);
+  border: 2px solid #e2e8f0;
+  border-radius: 50px;
+  padding: 7px 18px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text);
+}
+.nav-btn:hover, .nav-btn.active {
+  background: #1565C0;
+  color: white;
+  border-color: #1565C0;
+  transform: translateY(-1px);
+}
+
+/* ===== SECTION WRAPPER ===== */
+.section {
+  display: none;
+  padding: 32px 20px 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  animation: fadeIn 0.4s ease;
+}
+.section.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.section-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: #1565C0;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.section-subtitle {
+  text-align: center;
+  color: var(--muted);
+  font-size: 1rem;
+  margin-bottom: 32px;
+}
+
+/* ===== PART 1 & 4: VOCAB CARDS ===== */
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.vocab-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+  border: 2px solid transparent;
+}
+.vocab-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  display: flex; align-items: center; justify-content: center;
+}
+.card-img-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.card-img-placeholder {
+  font-size: 5rem;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+.card-num {
+  position: absolute; top: 10px; left: 10px;
+  background: rgba(0,0,0,0.55);
+  color: white;
+  border-radius: 50%;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.85rem;
+}
+
+.card-body { padding: 18px 20px 20px; }
+
+.card-word-row {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 6px; flex-wrap: wrap;
+}
+.card-word {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.9rem;
+  color: #1565C0;
+  line-height: 1;
+}
+.card-pos {
+  background: #e3f2fd;
+  color: #1565C0;
+  border-radius: 50px;
+  padding: 2px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  align-self: center;
+}
+.card-ipa {
+  font-size: 1rem;
+  color: #7c3aed;
+  font-style: italic;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+.card-meaning {
+  font-size: 1rem;
+  color: #374151;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.card-meaning-vi {
+  font-size: 0.9rem;
+  color: #059669;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+/* conjugation table */
+.conj-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0 14px;
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 0.88rem;
+}
+.conj-table th {
+  background: #1565C0;
+  color: white;
+  padding: 6px 10px;
+  font-weight: 700;
+  text-align: center;
+}
+.conj-table td {
+  padding: 6px 10px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+  font-weight: 600;
+}
+.conj-table tr:nth-child(even) td { background: #f0f9ff; }
+.conj-table .ipa-row td { color: #7c3aed; font-size: 0.82rem; font-style: italic; font-weight: 400; }
+
+/* audio btn */
+.audio-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: none;
+  border: 2px solid currentColor;
+  border-radius: 50px;
+  padding: 5px 14px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.audio-btn.word-btn { color: #1565C0; }
+.audio-btn.word-btn:hover { background: #1565C0; color: white; }
+.audio-btn.ex-btn { color: #059669; }
+.audio-btn.ex-btn:hover { background: #059669; color: white; }
+.audio-btn svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+
+.example-box {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  border-left: 4px solid #22c55e;
+  border-radius: 0 12px 12px 0;
+  padding: 12px 14px;
+  margin-top: 10px;
+}
+.example-en {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #166534;
+  margin-bottom: 4px;
+}
+.example-ipa {
+  font-size: 0.85rem;
+  color: #7c3aed;
+  font-style: italic;
+  margin-bottom: 4px;
+}
+.example-vi {
+  font-size: 0.9rem;
+  color: #059669;
+  font-weight: 600;
+}
+.example-audio-row {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 8px; flex-wrap: wrap;
+}
+
+.translate-btn {
+  background: #fff7ed;
+  border: 2px solid #f97316;
+  color: #ea580c;
+  border-radius: 50px;
+  padding: 4px 14px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.translate-btn:hover { background: #f97316; color: white; }
+
+/* ===== PART 2 ===== */
+.act-out-section {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  text-align: center;
+  margin-bottom: 28px;
+}
+.act-out-section h2 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 2rem;
+  color: #92400e;
+  margin-bottom: 12px;
+}
+.act-out-section p { color: #78350f; font-size: 1.05rem; line-height: 1.7; }
+
+.act-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+.act-card {
+  background: white;
+  border-radius: 16px;
+  padding: 18px 12px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+  border: 3px solid transparent;
+}
+.act-card:hover {
+  transform: scale(1.06) rotate(-2deg);
+  border-color: #f59e0b;
+  box-shadow: var(--shadow-lg);
+}
+.act-card .act-emoji { font-size: 2.4rem; margin-bottom: 8px; }
+.act-card .act-word { font-weight: 800; color: #1565C0; font-size: 1rem; }
+.act-card .act-hint { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+
+.compare-box {
+  background: white;
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  margin-top: 24px;
+}
+.compare-box h3 { font-family: 'Fredoka One', cursive; color: #7c3aed; font-size: 1.4rem; margin-bottom: 16px; }
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.compare-item {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 14px;
+  border-left: 4px solid #7c3aed;
+}
+.compare-item strong { color: #7c3aed; }
+
+/* ===== PART 3 ===== */
+.categorize-intro {
+  background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 28px;
+  border-left: 5px solid #7c3aed;
+}
+.categorize-intro h3 { font-family: 'Fredoka One', cursive; color: #7c3aed; margin-bottom: 8px; font-size: 1.3rem; }
+.categorize-intro p { color: #4c1d95; font-size: 0.95rem; line-height: 1.7; }
+
+.cat-table-wrap { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow); }
+.cat-table {
+  width: 100%; border-collapse: collapse;
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.cat-table thead tr { background: linear-gradient(135deg, #1565C0, #1976D2); }
+.cat-table thead th {
+  color: white; padding: 16px 24px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.2rem; text-align: left;
+  letter-spacing: 0.5px;
+}
+.cat-table tbody tr { border-bottom: 1px solid #e2e8f0; transition: background 0.15s; }
+.cat-table tbody tr:hover { background: #f0f9ff; }
+.cat-table tbody tr:last-child { border-bottom: none; }
+.cat-table td {
+  padding: 14px 24px;
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+.cat-animal { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.cat-emoji { font-size: 1.5rem; }
+.cat-move {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #ede9fe; color: #7c3aed;
+  border-radius: 50px; padding: 4px 14px;
+  font-weight: 700; font-size: 0.9rem;
+}
+
+.student-table {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px;
+  margin-top: 28px;
+}
+.student-table h3 { font-family: 'Fredoka One', cursive; color: #059669; font-size: 1.3rem; margin-bottom: 16px; }
+.fill-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.fill-row {
+  display: flex; gap: 10px; align-items: center;
+  background: #f0fdf4; border-radius: 12px; padding: 12px 16px;
+}
+.fill-label { font-weight: 700; color: #166534; width: 40%; }
+.fill-input {
+  flex: 1;
+  border: 2px solid #86efac;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.fill-input:focus { border-color: #22c55e; }
+
+/* ===== PART 5 ===== */
+.fact-book-header {
+  background: linear-gradient(135deg, #1a237e, #283593);
+  color: white;
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.fact-book-header::after {
+  content: '📚';
+  position: absolute; right: 28px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 5rem; opacity: 0.25;
+}
+.fact-book-header h2 { font-family: 'Fredoka One', cursive; font-size: 1.8rem; margin-bottom: 8px; }
+.fact-book-header p { opacity: 0.9; line-height: 1.7; font-size: 0.95rem; }
+
+.reading-strategy {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 28px;
+  border-left: 5px solid #f59e0b;
+}
+.reading-strategy h4 { color: #92400e; font-family: 'Fredoka One', cursive; font-size: 1.1rem; margin-bottom: 6px; }
+.reading-strategy p { color: #78350f; font-size: 0.92rem; line-height: 1.6; }
+
+.book-title-block {
+  text-align: center;
+  margin: 24px 0 32px;
+}
+.book-title-block h2 { font-family: 'Fredoka One', cursive; font-size: 2rem; color: #1565C0; }
+.book-title-block .author { color: var(--muted); font-style: italic; margin-top: 4px; }
+
+.story-cards { display: grid; gap: 28px; }
+
+.story-card {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  transition: box-shadow 0.25s;
+}
+.story-card:hover { box-shadow: var(--shadow-lg); }
+.story-card-img {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 5rem;
+  min-height: 180px;
+}
+.story-card-body { padding: 22px 24px; }
+
+.story-num {
+  display: inline-block;
+  background: #1565C0; color: white;
+  border-radius: 50px; padding: 2px 12px;
+  font-weight: 800; font-size: 0.8rem;
+  margin-bottom: 8px;
+}
+.story-verb {
+  font-family: 'Fredoka One', cursive;
+  font-size: 2rem; color: #1565C0;
+  margin-bottom: 10px;
+}
+.story-text {
+  font-size: 1rem; line-height: 1.75;
+  color: #374151;
+  margin-bottom: 14px;
+}
+.story-text strong { color: #1565C0; }
+
+.phrase-explain {
+  background: #f0f9ff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-top: 12px;
+}
+.phrase-explain h5 {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #0288D1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.phrase-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin-bottom: 6px; font-size: 0.88rem;
+}
+.phrase-key { font-weight: 800; color: #7c3aed; min-width: 180px; }
+.phrase-val { color: #374151; line-height: 1.5; }
+
+.story-audio-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+
+.translate-toggle-btn {
+  background: #fff7ed;
+  border: 2px solid #fb923c;
+  color: #ea580c;
+  border-radius: 50px;
+  padding: 5px 16px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.translate-toggle-btn:hover { background: #fb923c; color: white; }
+
+.story-vi {
+  display: none;
+  background: #f0fdf4;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-top: 8px;
+  font-size: 0.92rem;
+  color: #166534;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.story-vi.show { display: block; }
+
+/* vocab mini dict in p5 */
+.mini-dict-row {
+  display: flex; gap: 8px; align-items: center;
+  flex-wrap: wrap; margin-top: 8px;
+}
+.mini-dict-item {
+  background: #ede9fe; color: #7c3aed;
+  border-radius: 50px; padding: 3px 12px;
+  font-size: 0.8rem; font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.mini-dict-item:hover { background: #7c3aed; color: white; }
+
+/* ===== PART 6 ===== */
+.talk-section {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  text-align: center;
+  margin-bottom: 28px;
+}
+.talk-section h2 { font-family: 'Fredoka One', cursive; font-size: 2rem; color: #065f46; margin-bottom: 16px; }
+.talk-questions { display: grid; gap: 16px; margin-top: 24px; text-align: left; }
+.talk-q {
+  background: white;
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: var(--shadow);
+  border-left: 5px solid #10b981;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.talk-q-num {
+  background: #10b981; color: white;
+  border-radius: 50%; width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.9rem; flex-shrink: 0;
+}
+.talk-q-text { flex: 1; }
+.talk-q-en { font-weight: 700; color: #065f46; font-size: 1rem; margin-bottom: 4px; }
+.talk-q-vi { color: #059669; font-size: 0.9rem; }
+.talk-answer-area {
+  width: 100%;
+  border: 2px solid #86efac;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  margin-top: 8px;
+  min-height: 60px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.talk-answer-area:focus { border-color: #10b981; }
+
+.tips-box {
+  background: white;
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  margin-top: 28px;
+}
+.tips-box h3 { font-family: 'Fredoka One', cursive; color: #f59e0b; font-size: 1.4rem; margin-bottom: 16px; }
+.tip-item {
+  display: flex; gap: 12px; align-items: flex-start;
+  margin-bottom: 12px; font-size: 0.95rem; line-height: 1.6;
+}
+.tip-icon { font-size: 1.3rem; flex-shrink: 0; }
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 999; align-items: center; justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: white;
+  border-radius: var(--radius);
+  padding: 32px;
+  max-width: 500px; width: 90%;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  animation: fadeIn 0.3s ease;
+}
+.modal-close {
+  position: absolute; top: 14px; right: 16px;
+  background: none; border: none;
+  font-size: 1.5rem; cursor: pointer;
+  color: var(--muted);
+  line-height: 1;
+}
+.modal-word { font-family: 'Fredoka One', cursive; font-size: 2.2rem; color: #1565C0; }
+.modal-ipa { color: #7c3aed; font-style: italic; margin: 4px 0 10px; }
+.modal-meaning { font-weight: 700; font-size: 1.1rem; color: #374151; margin-bottom: 6px; }
+.modal-example { background: #f0f9ff; border-radius: 12px; padding: 12px; font-size: 0.95rem; color: #166534; font-weight: 600; }
+
+@media (max-width: 600px) {
+  .story-card { grid-template-columns: 1fr; }
+  .story-card-img { min-height: 120px; }
+  .compare-grid, .fill-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="paw-icons">🐾🌿🐾</div>
+  <h1>🐾 Animal Movement</h1>
+  <p>Vocabulary &amp; Reading Lesson – Science / English</p>
+</header>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <button class="nav-btn active" onclick="showSection('s1')">📚 Part 1</button>
+  <button class="nav-btn" onclick="showSection('s2')">🎭 Part 2</button>
+  <button class="nav-btn" onclick="showSection('s3')">📋 Part 3</button>
+  <button class="nav-btn" onclick="showSection('s4')">📖 Part 4</button>
+  <button class="nav-btn" onclick="showSection('s5')">📗 Part 5</button>
+  <button class="nav-btn" onclick="showSection('s6')">💬 Part 6</button>
+</nav>
+
+<!-- ===== PART 1 ===== -->
+<section id="s1" class="section active">
+  <h2 class="section-title">🐾 Part 1 – Vocabulary: How Animals Move</h2>
+  <p class="section-subtitle">Học từ vựng về cách động vật di chuyển · Click 🔊 để nghe · Click 🌐 để dịch</p>
+
+  <div class="vocab-grid" id="vocab-grid-1"></div>
+</section>
+
+<!-- ===== PART 2 ===== -->
+<section id="s2" class="section">
+  <h2 class="section-title">🎭 Part 2 – Act It Out!</h2>
+  <p class="section-subtitle">Thực hành diễn xuất chuyển động của động vật</p>
+
+  <div class="act-out-section">
+    <h2>Act out how animals move!</h2>
+    <p>Hãy bắt chước cách động vật di chuyển! Đứng dậy và thể hiện các chuyển động dưới đây.</p>
+    <p style="margin-top:10px">👉 <strong>How are animals different?</strong> – Động vật khác nhau như thế nào?</p>
+  </div>
+
+  <div class="act-cards">
+    <div class="act-card" onclick="showActModal('swim','🐠','Move your arms like fins through water!','Di chuyển tay như vây cá trong nước!')">
+      <div class="act-emoji">🐠</div>
+      <div class="act-word">SWIM</div>
+      <div class="act-hint">Move arms like fins</div>
+    </div>
+    <div class="act-card" onclick="showActModal('fly','🦅','Spread your arms wide and flap like wings!','Giang rộng tay và vỗ như cánh chim!')">
+      <div class="act-emoji">🦅</div>
+      <div class="act-word">FLY</div>
+      <div class="act-hint">Spread arms like wings</div>
+    </div>
+    <div class="act-card" onclick="showActModal('run','🐻‍❄️','Move your legs quickly forward and backward!','Di chuyển chân nhanh về phía trước và sau!')">
+      <div class="act-emoji">🐻‍❄️</div>
+      <div class="act-word">RUN</div>
+      <div class="act-hint">Move legs quickly</div>
+    </div>
+    <div class="act-card" onclick="showActModal('climb','🐒','Use hands and feet to grip and move up!','Dùng tay và chân bám và leo lên!')">
+      <div class="act-emoji">🐒</div>
+      <div class="act-word">CLIMB</div>
+      <div class="act-hint">Grip and move up</div>
+    </div>
+    <div class="act-card" onclick="showActModal('slide','🐧','Rock side to side as you shuffle forward!','Lắc qua lại khi bước về phía trước!')">
+      <div class="act-emoji">🐧</div>
+      <div class="act-word">SLIDE</div>
+      <div class="act-hint">Shuffle side to side</div>
+    </div>
+    <div class="act-card" onclick="showActModal('slither','🐍','Wiggle your whole body from side to side!','Uốn éo cả người từ bên này sang bên kia!')">
+      <div class="act-emoji">🐍</div>
+      <div class="act-word">SLITHER</div>
+      <div class="act-hint">Wiggle whole body</div>
+    </div>
+  </div>
+
+  <div class="compare-box">
+    <h3>🔍 How are animals different?</h3>
+    <div class="compare-grid">
+      <div class="compare-item"><strong>🐠 Fish vs 🐦 Bird</strong><br>Fish swim in water with fins. Birds fly in the air with wings.</div>
+      <div class="compare-item"><strong>🐒 Monkey vs 🐍 Snake</strong><br>Monkeys have limbs to climb. Snakes have no legs – they slither.</div>
+      <div class="compare-item"><strong>🐻‍❄️ Bear vs 🐧 Penguin</strong><br>Bears run fast on four legs. Penguins slide and waddle slowly.</div>
+      <div class="compare-item"><strong>On land vs In water</strong><br>Land animals use legs or slide. Water animals use fins or tails.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PART 3 ===== -->
+<section id="s3" class="section">
+  <h2 class="section-title">📋 Part 3 – Categorize Details</h2>
+  <p class="section-subtitle">Phân loại chi tiết – Animals &amp; Movement</p>
+
+  <div class="categorize-intro">
+    <h3>📝 Hướng dẫn làm bài (Instructions)</h3>
+    <p><strong>Bước 1:</strong> Đọc bảng bên dưới với hai cột: <em>Animals</em> (Động vật) và <em>Movement</em> (Chuyển động).<br>
+    <strong>Bước 2:</strong> Nhìn vào cột <em>Animals</em> và tìm cột <em>Movement</em> tương ứng.<br>
+    <strong>Bước 3:</strong> Điền vào bảng bên dưới bằng cách viết tên động vật và chuyển động còn thiếu.<br>
+    <strong>Bước 4:</strong> So sánh với bạn trong lớp: <em>"A _____ can _____ !"</em></p>
+  </div>
+
+  <div class="cat-table-wrap">
+    <table class="cat-table">
+      <thead>
+        <tr>
+          <th>🦁 Animals (Động vật)</th>
+          <th>🏃 Movement (Chuyển động)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><div class="cat-animal"><span class="cat-emoji">🐠</span> Fish (cá)</div></td><td><span class="cat-move">🏊 swim</span></td></tr>
+        <tr><td><div class="cat-animal"><span class="cat-emoji">🐦</span> Bird (chim)</div></td><td><span class="cat-move">🕊️ fly</span></td></tr>
+        <tr><td><div class="cat-animal"><span class="cat-emoji">🐻‍❄️</span> Polar bear (gấu trắng)</div></td><td><span class="cat-move">🏃 run</span></td></tr>
+        <tr><td><div class="cat-animal"><span class="cat-emoji">🐒</span> Monkey (khỉ)</div></td><td><span class="cat-move">🧗 climb</span></td></tr>
+        <tr><td><div class="cat-animal"><span class="cat-emoji">🐧</span> Penguin (chim cánh cụt)</div></td><td><span class="cat-move">🛷 slide</span></td></tr>
+        <tr><td><div class="cat-animal"><span class="cat-emoji">🐍</span> Snake (rắn)</div></td><td><span class="cat-move">〰️ slither</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="student-table">
+    <h3>✏️ Your Turn! – Em hãy điền vào chỗ trống</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:16px">Viết tên động vật và chuyển động tương ứng. Dùng từ: <em>swim, fly, run, climb, slide, slither</em></p>
+    <div class="fill-grid">
+      <div class="fill-row"><span class="fill-label">🐍 Snake →</span><input class="fill-input" placeholder="type movement..."></div>
+      <div class="fill-row"><span class="fill-label">🐦 Bird →</span><input class="fill-input" placeholder="type movement..."></div>
+      <div class="fill-row"><span class="fill-label">🐒 Monkey →</span><input class="fill-input" placeholder="type movement..."></div>
+      <div class="fill-row"><span class="fill-label">🐧 Penguin →</span><input class="fill-input" placeholder="type movement..."></div>
+      <div class="fill-row"><span class="fill-label">🐠 Fish →</span><input class="fill-input" placeholder="type movement..."></div>
+      <div class="fill-row"><span class="fill-label">🐻‍❄️ Polar bear →</span><input class="fill-input" placeholder="type movement..."></div>
+    </div>
+    <button onclick="checkAnswers()" style="margin-top:16px;background:#1565C0;color:white;border:none;border-radius:50px;padding:10px 28px;font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;">✅ Check Answers</button>
+    <div id="check-result" style="margin-top:12px;font-weight:700;color:#059669;display:none"></div>
+  </div>
+</section>
+
+<!-- ===== PART 4 ===== -->
+<section id="s4" class="section">
+  <h2 class="section-title">📖 Part 4 – More Vocabulary</h2>
+  <p class="section-subtitle">Từ vựng mở rộng · Click 🔊 để nghe</p>
+
+  <div class="vocab-grid" id="vocab-grid-4"></div>
+
+  <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:var(--radius);padding:24px 28px;margin-top:32px;border-left:5px solid #f59e0b;">
+    <h3 style="font-family:'Fredoka One',cursive;color:#92400e;font-size:1.3rem;margin-bottom:10px;">🐢 Discussion: What is one fact about turtles?</h3>
+    <p style="color:#78350f;line-height:1.7;margin-bottom:12px">Use the vocabulary you learned to answer! Example: <em>"One fact about turtles is that their movement is slow."</em></p>
+    <textarea style="width:100%;border:2px solid #fbbf24;border-radius:10px;padding:10px;font-family:'Nunito',sans-serif;font-size:0.95rem;min-height:80px;outline:none;" placeholder="Write your answer here... / Viết câu trả lời của em ở đây..."></textarea>
+  </div>
+</section>
+
+<!-- ===== PART 5 ===== -->
+<section id="s5" class="section">
+  <h2 class="section-title">📗 Part 5 – Read a Fact Book</h2>
+  <p class="section-subtitle">Đọc sách thực tế về chuyển động của động vật</p>
+
+  <div class="fact-book-header">
+    <h2>📚 Read a Fact Book</h2>
+    <p>A fact book is <strong>nonfiction</strong>. It gives facts about things that are real. Click the <strong>🔊</strong> button to listen to each sentence. Click <strong>🌐 Dịch</strong> to see Vietnamese translation.</p>
+    <div style="margin-top:14px">
+      <button class="audio-btn ex-btn" onclick="playAudio('fact_book/1.wav')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg> Listen: Intro</button>
+    </div>
+  </div>
+
+  <div class="reading-strategy">
+    <h4>📌 Reading Strategy: Make Connections</h4>
+    <p>As you read, connect new facts to things you have read in other texts and to things you know about the world. <br><em>(Khi đọc, hãy kết nối các sự kiện mới với những gì bạn đã đọc và những gì bạn biết về thế giới.)</em></p>
+  </div>
+
+  <div class="book-title-block">
+    <h2>Slither, Slide, Hop, and Run</h2>
+    <p class="author">by Katherine Kenah</p>
+  </div>
+
+  <div class="story-cards" id="story-cards"></div>
+</section>
+
+<!-- ===== PART 6 ===== -->
+<section id="s6" class="section">
+  <h2 class="section-title">💬 Part 6 – Talk About It!</h2>
+  <p class="section-subtitle">Thảo luận về những gì em đã học</p>
+
+  <div class="talk-section">
+    <h2>🗣️ Talk About It!</h2>
+    <p>Share your ideas with a partner! Chia sẻ ý kiến của em với bạn bên cạnh!</p>
+  </div>
+
+  <div class="talk-questions">
+    <div class="talk-q">
+      <div class="talk-q-num">1</div>
+      <div class="talk-q-text">
+        <div class="talk-q-en">Which animal movement do you think is the most interesting? Why?</div>
+        <div class="talk-q-vi">Em nghĩ chuyển động của con vật nào thú vị nhất? Tại sao?</div>
+        <textarea class="talk-answer-area" placeholder="My answer: I think ... is the most interesting because..."></textarea>
+      </div>
+    </div>
+    <div class="talk-q">
+      <div class="talk-q-num">2</div>
+      <div class="talk-q-text">
+        <div class="talk-q-en">Can you move like an animal? Which one? Show your partner!</div>
+        <div class="talk-q-vi">Em có thể di chuyển như một con vật không? Con nào? Hãy biểu diễn cho bạn xem!</div>
+        <textarea class="talk-answer-area" placeholder="I can move like a ..."></textarea>
+      </div>
+    </div>
+    <div class="talk-q">
+      <div class="talk-q-num">3</div>
+      <div class="talk-q-text">
+        <div class="talk-q-en">How are a fish and a bird different?</div>
+        <div class="talk-q-vi">Con cá và con chim khác nhau như thế nào?</div>
+        <textarea class="talk-answer-area" placeholder="A fish can... but a bird can..."></textarea>
+      </div>
+    </div>
+    <div class="talk-q">
+      <div class="talk-q-num">4</div>
+      <div class="talk-q-text">
+        <div class="talk-q-en">Which animals in the book live near you? How do they move?</div>
+        <div class="talk-q-vi">Những con vật nào trong sách sống gần em? Chúng di chuyển như thế nào?</div>
+        <textarea class="talk-answer-area" placeholder="Near my home, I see... They can..."></textarea>
+      </div>
+    </div>
+    <div class="talk-q">
+      <div class="talk-q-num">5</div>
+      <div class="talk-q-text">
+        <div class="talk-q-en">What new fact about animals did you learn today?</div>
+        <div class="talk-q-vi">Hôm nay em học được sự thật mới nào về động vật?</div>
+        <textarea class="talk-answer-area" placeholder="Today I learned that..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="tips-box">
+    <h3>💡 Useful Phrases / Mẫu câu hữu ích</h3>
+    <div class="tip-item"><span class="tip-icon">🗣️</span><div>A <strong>[animal]</strong> can <strong>[move]</strong>! – Con <strong>[động vật]</strong> có thể <strong>[chuyển động]</strong>!</div></div>
+    <div class="tip-item"><span class="tip-icon">🗣️</span><div>It moves <strong>[how]</strong> through the <strong>[where]</strong>. – Nó di chuyển <strong>[như thế nào]</strong> qua <strong>[đâu]</strong>.</div></div>
+    <div class="tip-item"><span class="tip-icon">🗣️</span><div>I think... is interesting because... – Em nghĩ... thú vị vì...</div></div>
+    <div class="tip-item"><span class="tip-icon">🗣️</span><div>One fact about turtles is... – Một sự thật về rùa là...</div></div>
+    <div class="tip-item"><span class="tip-icon">🎯</span><div>Make connections: <em>"This reminds me of... / This is similar to..."</em></div></div>
+  </div>
+</section>
+
+<!-- ACT MODAL -->
+<div class="modal-overlay" id="act-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('act-modal')">✕</button>
+    <div style="font-size:4rem;text-align:center;margin-bottom:12px" id="modal-emoji"></div>
+    <div class="modal-word" id="modal-word"></div>
+    <div style="font-size:1rem;font-weight:700;color:#1565C0;margin-bottom:12px" id="modal-action"></div>
+    <div class="modal-example" id="modal-action-vi"></div>
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+const vocab1 = [
+  {
+    n: 1, word: "swim", pos: "verb",
+    ipa: "/swɪm/",
+    meaning: "to move through water",
+    meaning_vi: "bơi – di chuyển trong nước",
+    conj: { v1:"swim /swɪm/", v2:"swam /swæm/", v3:"swum /swʌm/" },
+    example: "A fish swims.",
+    example_ipa: "/ə fɪʃ swɪmz/",
+    example_vi: "Một con cá bơi.",
+    emoji: "🐠"
+  },
+  {
+    n: 2, word: "fly", pos: "verb",
+    ipa: "/flaɪ/",
+    meaning: "to move through the air with wings",
+    meaning_vi: "bay – di chuyển trên không bằng cánh",
+    conj: { v1:"fly /flaɪ/", v2:"flew /fluː/", v3:"flown /floʊn/" },
+    example: "A bird flies.",
+    example_ipa: "/ə bɜːrd flaɪz/",
+    example_vi: "Một con chim bay.",
+    emoji: "🦅"
+  },
+  {
+    n: 3, word: "run", pos: "verb",
+    ipa: "/rʌn/",
+    meaning: "to move quickly on legs",
+    meaning_vi: "chạy – di chuyển nhanh bằng chân",
+    conj: { v1:"run /rʌn/", v2:"ran /ræn/", v3:"run /rʌn/" },
+    example: "A polar bear runs.",
+    example_ipa: "/ə ˈpoʊlər ber rʌnz/",
+    example_vi: "Một con gấu trắng chạy.",
+    emoji: "🐻‍❄️"
+  },
+  {
+    n: 4, word: "climb", pos: "verb",
+    ipa: "/klaɪm/",
+    meaning: "to go up using hands and feet",
+    meaning_vi: "leo trèo – đi lên bằng tay và chân",
+    conj: { v1:"climb /klaɪm/", v2:"climbed /klaɪmd/", v3:"climbed /klaɪmd/" },
+    example: "A monkey climbs.",
+    example_ipa: "/ə ˈmʌŋki klaɪmz/",
+    example_vi: "Một con khỉ leo trèo.",
+    emoji: "🐒"
+  },
+  {
+    n: 5, word: "slide", pos: "verb",
+    ipa: "/slaɪd/",
+    meaning: "to move smoothly along a surface",
+    meaning_vi: "trượt – di chuyển nhẹ nhàng trên mặt phẳng",
+    conj: { v1:"slide /slaɪd/", v2:"slid /slɪd/", v3:"slid /slɪd/" },
+    example: "A penguin slides.",
+    example_ipa: "/ə ˈpɛŋɡwɪn slaɪdz/",
+    example_vi: "Một con chim cánh cụt trượt.",
+    emoji: "🐧"
+  },
+  {
+    n: 6, word: "slither", pos: "verb",
+    ipa: "/ˈslɪðər/",
+    meaning: "to move by sliding and wiggling the body",
+    meaning_vi: "trườn – di chuyển bằng cách uốn éo cơ thể",
+    conj: { v1:"slither /ˈslɪðər/", v2:"slithered /ˈslɪðərd/", v3:"slithered /ˈslɪðərd/" },
+    example: "A snake slithers.",
+    example_ipa: "/ə sneɪk ˈslɪðərz/",
+    example_vi: "Một con rắn trườn.",
+    emoji: "🐍"
+  }
+];
+
+const vocab4 = [
+  {
+    n: 7, word: "back", pos: "noun/adj",
+    ipa: "/bæk/",
+    meaning: "the rear side; opposite of front",
+    meaning_vi: "phía sau, lưng – phần đằng sau; trái ngược với phía trước",
+    conj: null,
+    example: "The back tire is flat.",
+    example_ipa: "/ðə bæk ˈtaɪər ɪz flæt/",
+    example_vi: "Lốp xe phía sau bị xẹp.",
+    emoji: "🔙"
+  },
+  {
+    n: 8, word: "fact", pos: "noun",
+    ipa: "/fækt/",
+    meaning: "something that is true and real",
+    meaning_vi: "sự thật – điều gì đó là thật và có thật",
+    conj: null,
+    example: "It's a fact that a dog has four legs.",
+    example_ipa: "/ɪts ə fækt ðæt ə dɔːɡ hæz fɔːr lɛɡz/",
+    example_vi: "Đó là sự thật rằng một con chó có bốn chân.",
+    emoji: "✅"
+  },
+  {
+    n: 9, word: "front", pos: "noun/adj",
+    ipa: "/frʌnt/",
+    meaning: "the side that faces forward; opposite of back",
+    meaning_vi: "phía trước – mặt quay về phía trước; trái ngược với phía sau",
+    conj: null,
+    example: "The front of the house is blue.",
+    example_ipa: "/ðə frʌnt əv ðə haʊs ɪz bluː/",
+    example_vi: "Phía trước ngôi nhà màu xanh.",
+    emoji: "🏠"
+  },
+  {
+    n: 10, word: "movement", pos: "noun",
+    ipa: "/ˈmuːvmənt/",
+    meaning: "the act of moving; how something moves",
+    meaning_vi: "chuyển động – hành động di chuyển; cách thứ gì đó di chuyển",
+    conj: null,
+    example: "The movement of a turtle is slow.",
+    example_ipa: "/ðə ˈmuːvmənt əv ə ˈtɜːrtl ɪz sloʊ/",
+    example_vi: "Chuyển động của con rùa rất chậm.",
+    emoji: "🐢"
+  },
+  {
+    n: 11, word: "push", pos: "verb",
+    ipa: "/pʊʃ/",
+    meaning: "to press something forward with force",
+    meaning_vi: "đẩy – ép thứ gì đó về phía trước bằng lực",
+    conj: { v1:"push /pʊʃ/", v2:"pushed /pʊʃt/", v3:"pushed /pʊʃt/" },
+    example: "We had to push the car.",
+    example_ipa: "/wiː hæd tuː pʊʃ ðə kɑːr/",
+    example_vi: "Chúng tôi phải đẩy chiếc xe.",
+    emoji: "🚗"
+  }
+];
+
+const stories = [
+  {
+    n:1, verb:"Fly", emoji:"images/1.jpg",
+    text:"A bird can <strong>fly</strong>! It moves through the air with wings.",
+    vi:"Một con chim có thể bay! Nó di chuyển xuyên qua không khí bằng cánh.",
+    phrases:[
+      { key:"moves + through + the air", val:"di chuyển xuyên qua không khí – dùng 'through' khi đi xuyên qua một không gian" }
+    ]
+  },
+  {
+    n:2, verb:"Slither", emoji:"images/2.jpg",
+    text:"A snake can <strong>slither</strong>! It wiggles from side to side on the ground.",
+    vi:"Một con rắn có thể trườn! Nó uốn éo từ bên này sang bên kia trên mặt đất.",
+    phrases:[
+      { key:"wiggles + from + side + to + side", val:"lắc lư từ bên này sang bên kia – mô tả chuyển động uốn éo qua lại" }
+    ]
+  },
+  {
+    n:3, verb:"Hop", emoji:"images/3.jpg",
+    text:"A kangaroo can <strong>hop</strong>! It makes short leaps into the air. It uses its back feet to hop.",
+    vi:"Một con chuột túi có thể nhảy cóc! Nó thực hiện những cú nhảy ngắn vào không khí. Nó dùng chân sau để nhảy.",
+    phrases:[
+      { key:"makes + short + leaps + into + the + air", val:"thực hiện những cú nhảy ngắn vào không khí – 'makes leaps' = thực hiện cú nhảy" }
+    ]
+  },
+  {
+    n:4, verb:"Run", emoji:"images/4.jpg",
+    text:"A horse can <strong>run</strong>! Its legs move forward and backward very quickly.",
+    vi:"Một con ngựa có thể chạy! Chân của nó di chuyển về phía trước và phía sau rất nhanh.",
+    phrases:[
+      { key:"move + forward + and + backward", val:"di chuyển về phía trước và phía sau – diễn tả chuyển động hai chiều liên tục" }
+    ]
+  },
+  {
+    n:5, verb:"Slide", emoji:"images/5.jpg",
+    text:"A snail can <strong>slide</strong>! It moves slowly along the ground. A snail has a soft body inside its hard shell.",
+    vi:"Một con ốc sên có thể trượt! Nó di chuyển chậm chạp dọc theo mặt đất. Con ốc sên có thân mềm bên trong vỏ cứng.",
+    phrases:[
+      { key:"moves + slowly + along", val:"di chuyển chậm chạp dọc theo – 'along' = dọc theo một bề mặt hoặc đường đi" }
+    ]
+  },
+  {
+    n:6, verb:"Crawl", emoji:"images/6.jpg",
+    text:"A spider can <strong>crawl</strong>! It creeps forward with its legs.",
+    vi:"Một con nhện có thể bò! Nó bò về phía trước bằng chân của nó.",
+    phrases:[
+      { key:"creeps + forward", val:"bò về phía trước – 'creep' = di chuyển chậm và nhẹ nhàng, cẩn thận" }
+    ]
+  },
+  {
+    n:7, verb:"Hang", emoji:"images/7.jpg",
+    text:"A sloth can <strong>hang</strong>! It holds onto a tree and hangs below it. A sloth has long claws.",
+    vi:"Một con lười có thể treo! Nó bám vào cây và treo bên dưới. Con lười có móng vuốt dài.",
+    phrases:[
+      { key:"holds onto a tree", val:"bám chặt vào cây – 'hold onto' = nắm chặt, bám chặt" },
+      { key:"hangs below it", val:"treo bên dưới nó – 'below' = ở phía dưới" }
+    ]
+  },
+  {
+    n:8, verb:"Swim", emoji:"images/8.jpg",
+    text:"A dolphin can <strong>swim</strong>! It moves gently through the water. A dolphin swims by moving its tail up and down.",
+    vi:"Một con cá heo có thể bơi! Nó di chuyển nhẹ nhàng xuyên qua nước. Cá heo bơi bằng cách vẫy đuôi lên xuống.",
+    phrases:[
+      { key:"moves gently + through", val:"di chuyển nhẹ nhàng xuyên qua – 'gently' = nhẹ nhàng, 'through' = xuyên qua" },
+      { key:"swims by moving its tail up and down", val:"bơi bằng cách vẫy đuôi lên xuống – 'by + V-ing' = bằng cách làm gì đó" }
+    ]
+  },
+  {
+    n:9, verb:"Glide", emoji:"images/9.jpg",
+    text:"A bat can <strong>glide</strong>! It flies smoothly through the air. A bat's wings are really long fingers covered with skin.",
+    vi:"Một con dơi có thể lượn! Nó bay mượt mà xuyên qua không khí. Cánh của dơi thực ra là những ngón tay dài được bao phủ bởi da.",
+    phrases:[
+      { key:"flies smoothly through the air", val:"bay mượt mà xuyên qua không khí – 'smoothly' = mượt mà, không bị gián đoạn" },
+      { key:"covered with", val:"được bao phủ bởi – 'covered with skin' = da bao phủ bên ngoài" }
+    ]
+  },
+  {
+    n:10, verb:"Dig", emoji:"images/10.jpg",
+    text:"A dog can <strong>dig</strong>! It uses its paws to move dirt.",
+    vi:"Một con chó có thể đào! Nó dùng chân trước để xới đất.",
+    phrases:[]
+  },
+  {
+    n:11, verb:"Climb", emoji:"images/11.jpg",
+    text:"A raccoon can <strong>climb</strong>! It moves up and down by using its feet. Its front and back feet work like hands.",
+    vi:"Một con gấu mèo có thể leo! Nó di chuyển lên xuống bằng chân. Chân trước và chân sau của nó hoạt động như bàn tay.",
+    phrases:[]
+  },
+  {
+    n:12, verb:"Waddle", emoji:"images/12.jpg",
+    text:"A penguin can <strong>waddle</strong>! It rocks from side to side as it walks. A penguin can waddle as fast as a person walks!",
+    vi:"Một con chim cánh cụt có thể đi lạch bạch! Nó lắc lư từ bên này sang bên kia khi đi. Chim cánh cụt có thể đi lạch bạch nhanh bằng một người đi bộ!",
+    phrases:[
+      { key:"rocks from side to side as it walks", val:"lắc lư từ bên này sang bên kia trong khi đi – 'as' = trong khi, đồng thời" }
+    ]
+  }
+];
+
+// Mini dict for part 5 (from part 1)
+const miniDict = {
+  swim: vocab1[0],
+  fly: vocab1[1],
+  run: vocab1[2],
+  climb: vocab1[3],
+  slide: vocab1[4],
+  slither: vocab1[5]
+};
+
+// ===== RENDER =====
+function audioBtn(file, label, cls) {
+  return `<button class="audio-btn ${cls}" onclick="playAudio('${file}')">
+    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+    ${label}
+  </button>`;
+}
+
+function renderVocabCard(d, idx) {
+  const conjHtml = d.conj ? `
+    <table class="conj-table">
+      <thead><tr><th>V1 (Base)</th><th>V2 (Past)</th><th>V3 (Past Participle)</th></tr></thead>
+      <tbody>
+        <tr><td>${d.conj.v1.split(' ')[0]}</td><td>${d.conj.v2.split(' ')[0]}</td><td>${d.conj.v3.split(' ')[0]}</td></tr>
+        <tr class="ipa-row"><td>${d.conj.v1.split(' ').slice(1).join(' ')}</td><td>${d.conj.v2.split(' ').slice(1).join(' ')}</td><td>${d.conj.v3.split(' ').slice(1).join(' ')}</td></tr>
+      </tbody>
+    </table>` : '';
+
+  return `
+  <div class="vocab-card">
+    <div class="card-img-wrap">
+      <img src="images/${d.n}.png" alt="${d.word}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="card-img-placeholder" style="display:none">${d.emoji}</div>
+      <div class="card-num">${d.n}</div>
+    </div>
+    <div class="card-body">
+      <div class="card-word-row">
+        <span class="card-word">${d.word}</span>
+        <span class="card-pos">${d.pos}</span>
+      </div>
+      <div class="card-ipa">${d.ipa}</div>
+      <div class="card-meaning">🔤 ${d.meaning}</div>
+      <div class="card-meaning-vi">🇻🇳 ${d.meaning_vi}</div>
+      ${conjHtml}
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+        ${audioBtn(`words/${d.n}.wav`, '🔊 Word', 'word-btn')}
+      </div>
+      <div class="example-box">
+        <div class="example-en">📝 ${d.example}</div>
+        <div class="example-ipa">${d.example_ipa}</div>
+        <div class="example-vi">🇻🇳 ${d.example_vi}</div>
+        <div class="example-audio-row">
+          ${audioBtn(`examples/${d.n}.wav`, '🔊 Example', 'ex-btn')}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderStoryCard(s) {
+  const phraseHtml = s.phrases.length ? `
+    <div class="phrase-explain">
+      <h5>📌 Phrase Explanation / Giải thích cụm từ</h5>
+      ${s.phrases.map(p=>`
+        <div class="phrase-item">
+          <span class="phrase-key">${p.key}</span>
+          <span class="phrase-val">${p.val}</span>
+        </div>`).join('')}
+    </div>` : '';
+
+  // mini dict links for known words
+  const knownWords = Object.keys(miniDict);
+  const dictLinks = knownWords.filter(w => s.text.toLowerCase().includes(w)).map(w=>
+    `<span class="mini-dict-item" onclick="showMiniDict('${w}')">${w}</span>`
+  ).join('');
+  const dictRow = dictLinks ? `<div class="mini-dict-row"><span style="font-size:0.78rem;color:var(--muted)">📖 See vocab:</span>${dictLinks}</div>` : '';
+
+  return `
+  <div class="story-card">
+    <img src="${s.emoji}" style="width:100px; height:100px; object-fit:cover; border-radius:10px;" />
+    <div class="story-card-body">
+      <span class="story-num">No. ${s.n}</span>
+      <div class="story-verb">${s.verb}</div>
+      <div class="story-text">${s.text}</div>
+      <div class="story-audio-row">
+        ${audioBtn(`fact_book/${s.n}.wav`, '🔊 Listen', 'ex-btn')}
+        <button class="translate-toggle-btn" onclick="toggleVi(this)">🌐 Dịch nghĩa</button>
+      </div>
+      <div class="story-vi">${s.vi}</div>
+      ${phraseHtml}
+      ${dictRow}
+    </div>
+  </div>`;
+}
+
+// ===== INIT =====
+document.getElementById('vocab-grid-1').innerHTML = vocab1.map(renderVocabCard).join('');
+document.getElementById('vocab-grid-4').innerHTML = vocab4.map(renderVocabCard).join('');
+document.getElementById('story-cards').innerHTML = stories.map(renderStoryCard).join('');
+
+// ===== FUNCTIONS =====
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx = ['s1','s2','s3','s4','s5','s6'].indexOf(id);
+  document.querySelectorAll('.nav-btn')[idx].classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+let currentAudio = null;
+let currentSrc = null;
+
+function playAudio(src) {
+  // Nếu đang phát đúng file này → toggle pause
+  if (currentAudio && currentSrc === src) {
+    if (!currentAudio.paused) {
+      currentAudio.pause();
+      return;
+    }
+  }
+
+  // Nếu đang phát file khác → dừng
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+  }
+
+  currentAudio = new Audio(src);
+  currentSrc = src;
+
+  currentAudio.play()
+    .catch(() => console.log('Audio file not found: ' + src));
+}
+
+function toggleVi(btn) {
+  const vi = btn.parentElement.nextElementSibling;
+  vi.classList.toggle('show');
+  btn.textContent = vi.classList.contains('show') ? '🙈 Ẩn nghĩa' : '🌐 Dịch nghĩa';
+}
+
+function showActModal(word, emoji, action, actionVi) {
+  document.getElementById('modal-emoji').textContent = emoji;
+  document.getElementById('modal-word').textContent = word.toUpperCase();
+  document.getElementById('modal-action').textContent = '👉 ' + action;
+  document.getElementById('modal-action-vi').textContent = '🇻🇳 ' + actionVi;
+  document.getElementById('act-modal').classList.add('open');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+function showMiniDict(word) {
+  const d = miniDict[word];
+  if (!d) return;
+  const modal = document.getElementById('act-modal');
+  document.getElementById('modal-emoji').textContent = d.emoji;
+  document.getElementById('modal-word').textContent = d.word + ' ' + d.ipa;
+  document.getElementById('modal-action').textContent = d.meaning;
+  document.getElementById('modal-action-vi').textContent = '🇻🇳 ' + d.meaning_vi + '\n📝 ' + d.example;
+  modal.classList.add('open');
+}
+
+const answers3 = ['slither','fly','climb','slide','swim','run'];
+function checkAnswers() {
+  const inputs = document.querySelectorAll('.fill-input');
+  let score = 0;
+  inputs.forEach((inp, i) => {
+    const val = inp.value.trim().toLowerCase();
+    if (val === answers3[i]) {
+      inp.style.borderColor = '#22c55e'; score++;
+    } else if (val) {
+      inp.style.borderColor = '#ef4444';
+    }
+  });
+  const res = document.getElementById('check-result');
+  res.style.display = 'block';
+  res.textContent = `✅ ${score}/${inputs.length} correct! ${score===inputs.length ? '🎉 Perfect!' : 'Try again! / Thử lại nhé!'}`;
+  res.style.color = score === inputs.length ? '#059669' : '#dc2626';
+}
+
+// Close modal on overlay click
+document.getElementById('act-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal('act-modal');
+});
+</script>
+</body>
+</html>
